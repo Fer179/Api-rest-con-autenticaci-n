@@ -11,4 +11,13 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const cliente = controlador.listarUno(id).then((cliente) => {
+        respuesta.success(req, res, cliente, 200);
+    }).catch((error) => {
+        respuesta.error(req, res, error, 500);
+    });
+});
+
 module.exports = router;
