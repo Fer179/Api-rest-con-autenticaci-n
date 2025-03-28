@@ -56,16 +56,8 @@ function uno(tabla, id) {
 }
 
 function agregar(tabla, data) {
-    if (data.id == 0) {
-        return insertar (tabla, data);
-    } else {
-        return actualizar(tabla, data.id, data);
-    }
-}
-
-function insertar(tabla, data) {
     return new Promise((resolve, reject) => {
-        conexion.query(`INSERT INTO ${tabla} SET ?`, data, (err, result) => {
+        conexion.query(`INSERT INTO ${tabla} SET ? ON DUPLICATE KEY UPDATE ?`, [data, data], (err, result) => {
             if (err) return reject(err);
             resolve(result);
         });
@@ -81,11 +73,11 @@ function eliminar(tabla, data) {
     });
 }
 
-function actualizar(tabla, id, data) {
+function query(tabla, consulta) {
     return new Promise((resolve, reject) => {
-        conexion.query(`UPDATE ${tabla} SET ? WHERE id = ?`, [data, id], (err, result) => {
+        conexion.query(`SELECT * FROM ${tabla} WHERE ?`, consulta, (err, result) => {
             if (err) return reject(err);
-            resolve(result);
+            resolve(result[0]);
         });
     });
 }
@@ -95,5 +87,5 @@ module.exports = {
     uno,
     agregar,
     eliminar,
-    actualizar
+    query
 };

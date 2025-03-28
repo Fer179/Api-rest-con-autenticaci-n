@@ -9,5 +9,8 @@ module.exports = {
         user: process.env.MYSQL_USER || 'root',
         password: process.env.MYSQL_PASS || '',
         database: process.env.MYSQL_DB || 'prueba'
+    },
+    jwt: {
+        secret: process.env.JWT_SECRET || 'secret'
     }
 }
