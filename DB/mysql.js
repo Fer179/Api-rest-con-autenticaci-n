@@ -56,6 +56,14 @@ function uno(tabla, id) {
 }
 
 function agregar(tabla, data) {
+    if (data.id == 0) {
+        return insertar (tabla, data);
+    } else {
+        return actualizar(tabla, data.id, data);
+    }
+}
+
+function insertar(tabla, data) {
     return new Promise((resolve, reject) => {
         conexion.query(`INSERT INTO ${tabla} SET ?`, data, (err, result) => {
             if (err) return reject(err);
@@ -64,9 +72,9 @@ function agregar(tabla, data) {
     });
 }
 
-function eliminar(tabla, id) {
+function eliminar(tabla, data) {
     return new Promise((resolve, reject) => {
-        conexion.query(`DELETE FROM ${tabla} WHERE id = ?`, [id], (err, result) => {
+        conexion.query(`DELETE FROM ${tabla} WHERE id = ?`, [data], (err, result) => {
             if (err) return reject(err);
             resolve(result);
         });
