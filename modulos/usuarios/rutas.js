@@ -32,7 +32,7 @@ async function uno(req, res, next) {
 async function eliminar(req, res, next) {
     try {
         const cliente = await controlador.eliminar(req.body);
-        respuesta.success(req, res, 'Cliente eliminado correctamente', 200);
+        respuesta.success(req, res, 'Usuario eliminado correctamente', 200);
     } catch (error) {
         next(error);
     }
@@ -42,9 +42,9 @@ async function agregar(req, res, next) {
     try {
         const cliente = await controlador.agregar(req.body);
         if (req.body.id == 0) {
-            mensaje = 'Cliente agregado correctamente';
+            mensaje = 'Usuario agregado correctamente';
         } else {
-            mensaje = 'Cliente actualizado correctamente';
+            mensaje = 'Usuario actualizado correctamente';
         }
         respuesta.success(req, res, mensaje, 201);
     } catch (error) {

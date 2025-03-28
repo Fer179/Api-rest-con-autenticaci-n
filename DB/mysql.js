@@ -74,7 +74,7 @@ function insertar(tabla, data) {
 
 function eliminar(tabla, data) {
     return new Promise((resolve, reject) => {
-        conexion.query(`DELETE FROM ${tabla} WHERE id = ?`, [data], (err, result) => {
+        conexion.query(`DELETE FROM ${tabla} WHERE id = ?`, [data.id], (err, result) => {
             if (err) return reject(err);
             resolve(result);
         });
