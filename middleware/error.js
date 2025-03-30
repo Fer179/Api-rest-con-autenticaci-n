@@ -7,4 +7,3 @@ function error (message, code) {
 }
 
 module.exports = error;
-// Compare this snippet from middleware/error.js:
